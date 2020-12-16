@@ -1,7 +1,7 @@
 ---
-title: "Go：Goroutine与Channel实现并行"
+title: "Go并发：Goroutine与Channel实现并发"
 date: 2020-12-16T11:09:04+08:00
-Flag: ["go笔记"]
+tags: ["go笔记"]
 draft: false
 ---
 

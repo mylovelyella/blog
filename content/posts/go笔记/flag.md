@@ -1,5 +1,5 @@
 ---
-title: "Go：Flag库"
+title: "Go标准库：Flag库"
 date: 2020-12-16T10:33:06+08:00
 tags: ["go笔记"]
 draft: false
