@@ -1,20 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>mylovelyella网站足迹 on Peacher`s Blog</title>
-    <link>https://mylovelyella.github.io/tags/mylovelyella%E7%BD%91%E7%AB%99%E8%B6%B3%E8%BF%B9/</link>
-    <description>Recent content in mylovelyella网站足迹 on Peacher`s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 03 Dec 2020 16:51:29 +0800</lastBuildDate><atom:link href="https://mylovelyella.github.io/tags/mylovelyella%E7%BD%91%E7%AB%99%E8%B6%B3%E8%BF%B9/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>My First Step</title>
-      <link>https://mylovelyella.github.io/2020/my-first-step/</link>
-      <pubDate>Thu, 03 Dec 2020 16:51:29 +0800</pubDate>
-      
-      <guid>https://mylovelyella.github.io/2020/my-first-step/</guid>
-      <description>Hi!</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>mylovelyella网站足迹 - Tag - Peacher`s Blog</title>
+        <link>https://mylovelyella.github.io/tags/mylovelyella%E7%BD%91%E7%AB%99%E8%B6%B3%E8%BF%B9/</link>
+        <description>mylovelyella网站足迹 - Tag - Peacher`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 03 Dec 2020 16:51:29 &#43;0800</lastBuildDate><atom:link href="https://mylovelyella.github.io/tags/mylovelyella%E7%BD%91%E7%AB%99%E8%B6%B3%E8%BF%B9/" rel="self" type="application/rss+xml" /><item>
+    <title>My First Step</title>
+    <link>https://mylovelyella.github.io/2020/my-first-step/</link>
+    <pubDate>Thu, 03 Dec 2020 16:51:29 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://mylovelyella.github.io/2020/my-first-step/</guid>
+    <description><![CDATA[Hi!]]></description>
+</item></channel>
 </rss>

@@ -1,5 +1,5 @@
 ---
-title: "Flag库"
+title: "Go：Flag库"
 date: 2020-12-16T10:33:06+08:00
 tags: ["go笔记"]
 draft: false
@@ -19,7 +19,7 @@ var h bool
 flag.BoolVar(&h, "h", false, "Show help")
 ```
 
-
+​    
 
 ### 解析
 
@@ -38,7 +38,7 @@ fmt.Println("q is ", *q)
 fmt.Println("h is ", h)
 ```
 
-
+​    
 
 ### 一个简单的例子
 
@@ -117,9 +117,11 @@ String is  abc
 q is  true
 ```
 
-flag在一般的情况下是够用的了。
+​    
 
+**flag在一般的情况下是够用的了。**
 
+​    
 
 ### 延伸阅读
 
