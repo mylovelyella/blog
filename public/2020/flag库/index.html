@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="Peacher">
+    <meta name="description" content="???????">
+    <meta name="keywords" content="???????">
+    
+    <link rel="prev" href="https://mylovelyella.github.io/2020/my-first-step/" />
+    
+    <link rel="canonical" href="https://mylovelyella.github.io/2020/flag%E5%BA%93/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            Flag库 | Peacher`s Blog
+        
+    </title>
+    <meta name="title" content="Flag库 | Peacher`s Blog">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mylovelyella.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Flag库",
+    "headline" : "Flag库",
+    "description" : "Go语言内置了非常多具有常用功能的内置包，它们被称为标准库。我会在博客中以每篇文章一个标准库的方式记录我对标准库的理解和学习笔记。 今天是第一",
+    "inLanguage" : "zh-cn",
+    "author" : "Peacher",
+    "creator" : "Peacher",
+    "publisher": "Peacher",
+    "accountablePerson" : "Peacher",
+    "copyrightHolder" : "Peacher",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-12-16 10:33:06 \u002b0800 CST",
+    "dateModified" : "2020-12-16 10:33:06 \u002b0800 CST",
+    "url" : "https:\/\/mylovelyella.github.io\/2020\/flag%E5%BA%93\/",
+    "wordCount" : "808",
+    "keywords" : [ "go笔记", "Peacher`s Blog"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://mylovelyella.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://mylovelyella.github.io">Peacher`s Blog</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Flag库</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mylovelyella.github.io" rel="author">Peacher</a> with ♥
+                <span class="post-time">
+                on <time datetime=2020-12-16 itemprop="datePublished">December 16, 2020</time>
+                </span>
+                in
+                
+                <span class="post-word-count">808 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <p>Go语言内置了非常多具有常用功能的内置包，它们被称为标准库。我会在博客中以每篇文章一个标准库的方式记录我对标准库的理解和学习笔记。</p>
+<p>今天是第一篇：flag包，这个包是用来做命令行参数解析的。开发者经常会写一些命令行程序，所以参数解析是常见的需求。</p>
+<p>定义参数可以用<code>flag.String()</code>、<code>flag.Int()</code>、<code>flag.Int()</code>等，定义方式有2种：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 1. flag.XXX。其中XXX可以是Int、String和Bool等，其结果是相应类型的指针：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">q</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Bool</span>(<span style="color:#e6db74">&#34;q&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;Exit&#34;</span>)  <span style="color:#75715e">// 相当于 var q *bool
+</span><span style="color:#75715e">// 2. flag.XXXVar。就是在类型后面加`Var`，其实是把flag绑定到对应类型的变量上:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">h</span> <span style="color:#66d9ef">bool</span>
+<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">BoolVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">h</span>, <span style="color:#e6db74">&#34;h&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;Show help&#34;</span>)
+</code></pre></div><h3 id="解析">解析</h3>
+<p>定义完全部参数后可以通过调用<code>flag.Parse()</code>进行解析。命令行语法有如下三种形式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">-flag // 只支持bool类型
+-flag<span style="color:#f92672">=</span>x  // 任意类型
+-flag x // 只支持非bool类型
+</code></pre></div><p>解析之后，flag的值可以直接使用：如果使用的是flag自身，它们是指针；如果绑定到了某个变量，它们是值：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;q is &#34;</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">q</span>)
+<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;h is &#34;</span>, <span style="color:#a6e22e">h</span>)
+</code></pre></div><h3 id="一个简单的例子">一个简单的例子</h3>
+<p>用一个简单的例子先感受下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+)
+
+<span style="color:#66d9ef">var</span> (
+	<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>
+    <span style="color:#a6e22e">h</span> <span style="color:#66d9ef">bool</span>
+	<span style="color:#a6e22e">q</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">bool</span>
+    <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
+	<span style="color:#a6e22e">q</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Bool</span>(<span style="color:#e6db74">&#34;q&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;Exit&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">BoolVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">h</span>, <span style="color:#e6db74">&#34;h&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;Show help&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">IntVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">n</span>, <span style="color:#e6db74">&#34;n&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;Set number&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">StringVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#e6db74">&#34;s&#34;</span>, <span style="color:#e6db74">&#34;Default string&#34;</span>, <span style="color:#e6db74">&#34;Set String&#34;</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">h</span> {
+        <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Usage</span>()
+    } <span style="color:#66d9ef">else</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">q</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;q is &#34;</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">q</span>)
+			<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">0</span>)
+		}
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Number is &#34;</span>, <span style="color:#a6e22e">n</span>)
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;String is &#34;</span>, <span style="color:#a6e22e">s</span>)
+	}
+}
+</code></pre></div><p>定义flag通常放在初始化函数init里面，在main函数中首先用<code>flag.Parse</code>解析参数。然后根据命令行的输入决定怎么显示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">❯ go run simple.go  <span style="color:#75715e"># 默认输出</span>
+Number is  <span style="color:#ae81ff">0</span>
+String is  Default string
+❯ go run simple.go -h  <span style="color:#75715e"># 输出帮助信息</span>
+Usage of /var/folders/x6/vg82csf90dl3mnnqtbb32d580000gn/T/go-build470860288/b001/exe/simple:
+  -h	Show help
+  -n int
+    	Set number
+  -q	Exit
+  -s string
+    	Set String <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;Default string&#34;</span><span style="color:#f92672">)</span>
+❯ go run simple.go -q
+q is  true
+❯ go run simple.go -q false  <span style="color:#75715e"># 错误用法，false没有生效</span>
+q is  true
+❯ go run simple.go -q<span style="color:#f92672">=</span>false  <span style="color:#75715e"># 正确的用法</span>
+Number is  <span style="color:#ae81ff">0</span>
+String is  Default string
+❯ go run simple.go -n <span style="color:#ae81ff">10</span>  <span style="color:#75715e"># 指定n的值</span>
+Number is  <span style="color:#ae81ff">10</span>
+String is  Default string
+❯ go run simple.go -s abc  <span style="color:#75715e"># 指定s的值</span>
+Number is  <span style="color:#ae81ff">0</span>
+String is  abc
+❯ go run simple.go -n <span style="color:#ae81ff">10</span> -s abc  <span style="color:#75715e"># 同时指定n和s的值</span>
+Number is  <span style="color:#ae81ff">10</span>
+String is  abc
+❯ go run simple.go -n <span style="color:#ae81ff">10</span> -s abc -q  <span style="color:#75715e"># 程序逻辑中，q为真时直接打印退出了，忽略了另外2个参数</span>
+q is  true
+</code></pre></div><p>flag在一般的情况下是够用的了。</p>
+<h3 id="延伸阅读">延伸阅读</h3>
+<ol>
+<li><a href="https://golang.org/pkg/flag/">https://golang.org/pkg/flag/</a></li>
+<li><a href="https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter13/13.1.html">https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter13/13.1.html</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Peacher </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mylovelyella.github.io/2020/flag%E5%BA%93/>https://mylovelyella.github.io/2020/flag%E5%BA%93/</span>
+            </p>
+            
+            
+            <p class="copyright-item lincese">
+                未经允许不得转载
+            </p>
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://mylovelyella.github.io/tags/go%E7%AC%94%E8%AE%B0/">
+                    #go笔记</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://mylovelyella.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mylovelyella.github.io/2020/my-first-step/" class="prev" rel="prev" title="My First Step"><i class="iconfont icon-left"></i>&nbsp;My First Step</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mylovelyella.github.io">Peacher</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+
+
+        </div>
+    </body>
+</html>
