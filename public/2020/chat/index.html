@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="Peacher">
+    <meta name="description" content="???????">
+    <meta name="keywords" content="???????">
+    
+    <link rel="prev" href="https://mylovelyella.github.io/2020/parallel-exit/" />
+    
+    <link rel="canonical" href="https://mylovelyella.github.io/2020/chat/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            Go并发：聊天服务器 | Peacher`s Blog
+        
+    </title>
+    <meta name="title" content="Go并发：聊天服务器 | Peacher`s Blog">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mylovelyella.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Go并发：聊天服务器",
+    "headline" : "Go并发：聊天服务器",
+    "description" : "Go语言聊天服务器 服务端 服务端程序中包含 4 个 goroutine，分别是一个主 goroutine 和广播（broadcaster）goroutine，每一个连接",
+    "inLanguage" : "zh-cn",
+    "author" : "Peacher",
+    "creator" : "Peacher",
+    "publisher": "Peacher",
+    "accountablePerson" : "Peacher",
+    "copyrightHolder" : "Peacher",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-12-16 18:04:27 \u002b0800 CST",
+    "dateModified" : "2020-12-16 18:04:27 \u002b0800 CST",
+    "url" : "https:\/\/mylovelyella.github.io\/2020\/chat\/",
+    "wordCount" : "1442",
+    "keywords" : [ "go笔记", "Peacher`s Blog"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://mylovelyella.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://mylovelyella.github.io">Peacher`s Blog</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go并发：聊天服务器</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mylovelyella.github.io" rel="author">Peacher</a> with ♥
+                <span class="post-time">
+                on <time datetime=2020-12-16 itemprop="datePublished">December 16, 2020</time>
+                </span>
+                in
+                
+                <span class="post-word-count">1442 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="go语言聊天服务器">Go语言聊天服务器</h1>
+<h2 id="服务端">服务端</h2>
+<p>服务端程序中包含 4 个 goroutine，分别是一个主 goroutine 和广播（broadcaster）goroutine，每一个连接里面又包含一个连接处理（handleConn）goroutine 和一个客户写入（clientwriter）goroutine。</p>
+<p>广播器（broadcaster）是用于如何使用 select 的一个规范说明，因为它需要对三种不同的消息进行响应。</p>
+<p>主 goroutine 的工作是监听端口，接受连接客户端的网络连接，对每一个连接，它将创建一个新的 handleConn goroutine。</p>
+<p>完整的示例代码如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;bufio&#34;</span>
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+    <span style="color:#e6db74">&#34;log&#34;</span>
+    <span style="color:#e6db74">&#34;net&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">listener</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Listen</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#e6db74">&#34;localhost:8000&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+    }
+
+    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">broadcaster</span>()
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">Accept</span>()
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">err</span>)
+            <span style="color:#66d9ef">continue</span>
+        }
+        <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">handleConn</span>(<span style="color:#a6e22e">conn</span>)
+    }
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">client</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">string</span> <span style="color:#75715e">// 对外发送消息的通道
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">var</span> (
+    <span style="color:#a6e22e">entering</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">client</span>)
+    <span style="color:#a6e22e">leaving</span>  = make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">client</span>)
+    <span style="color:#a6e22e">messages</span> = make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>) <span style="color:#75715e">// 所有连接的客户端
+</span><span style="color:#75715e"></span>)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">broadcaster</span>() {
+    <span style="color:#a6e22e">clients</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#a6e22e">client</span>]<span style="color:#66d9ef">bool</span>)
+    <span style="color:#66d9ef">for</span> {
+        <span style="color:#66d9ef">select</span> {
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">messages</span>:
+            <span style="color:#75715e">// 把所有接收到的消息广播给所有客户端
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// 发送消息通道
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">cli</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">clients</span> {
+                <span style="color:#a6e22e">cli</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">msg</span>
+            }
+
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">cli</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">entering</span>:
+            <span style="color:#a6e22e">clients</span>[<span style="color:#a6e22e">cli</span>] = <span style="color:#66d9ef">true</span>
+
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">cli</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">leaving</span>:
+            delete(<span style="color:#a6e22e">clients</span>, <span style="color:#a6e22e">cli</span>)
+            close(<span style="color:#a6e22e">cli</span>)
+        }
+    }
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handleConn</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Conn</span>) {
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>) <span style="color:#75715e">// 对外发送客户消息的通道
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">clientWriter</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">ch</span>)
+
+    <span style="color:#a6e22e">who</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">RemoteAddr</span>().<span style="color:#a6e22e">String</span>()
+    <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;欢迎 &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">who</span>
+    <span style="color:#a6e22e">messages</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">who</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 上线&#34;</span>
+    <span style="color:#a6e22e">entering</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch</span>
+
+    <span style="color:#a6e22e">input</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewScanner</span>(<span style="color:#a6e22e">conn</span>)
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">Scan</span>() {
+        <span style="color:#a6e22e">messages</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">who</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">Text</span>()
+    }
+    <span style="color:#75715e">// 注意：忽略 input.Err() 中可能的错误
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">leaving</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch</span>
+    <span style="color:#a6e22e">messages</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">who</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 下线&#34;</span>
+    <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Close</span>()
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">clientWriter</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Conn</span>, <span style="color:#a6e22e">ch</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>) {
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ch</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintln</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">msg</span>) <span style="color:#75715e">// 注意：忽略网络层面的错误
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><p>代码中 main 函数里面写的代码非常简单，其实服务器要做的事情总结一下无非就是获得 listener 对象，然后不停的获取链接上来的 conn 对象，最后把这些对象丢给处理链接函数去进行处理。</p>
+<p>在使用 handleConn 方法处理 conn 对象的时候，对不同的链接都启一个 goroutine 去并发处理每个 conn 这样则无需等待。</p>
+<p>由于要给所有在线的用户发送消息，而不同用户的 conn 对象都在不同的 goroutine 里面，但是Go语言中有 channel 来处理各不同 goroutine 之间的消息传递，所以在这里我们选择使用 channel 在各不同的 goroutine 中传递广播消息。</p>
+<p>​</p>
+<p>在 main 函数里面使用 goroutine 开启了一个 broadcaster 函数来负责广播所有用户发送的消息。</p>
+<p>这里使用一个字典来保存用户 clients，字典的 key 是各连接申明的单向并发队列。</p>
+<p>使用一个 select 开启一个多路复用：</p>
+<ul>
+<li>每当有广播消息从 messages 发送进来，都会循环 cliens 对里面的每个 channel 发消息。</li>
+<li>每当有消息从 entering 里面发送过来，就生成一个新的 key - value，相当于给 clients 里面增加一个新的 client。</li>
+<li>每当有消息从 leaving 里面发送过来，就删掉这个 key - value 对，并关闭对应的 channel。</li>
+</ul>
+<p>​</p>
+<p>下面再来看一下每个客户自己的 goroutine。</p>
+<p>handleConn 函数创建一个对外发送消息的新通道，然后通过 entering 通道通知广播者新客户到来，接着它读取客户发来的每一行文本，通过全局接收消息通道将每一行发送给广播者，发送时在每条消息前面加上发送者 ID 作为前缀。一旦从客户端读取完毕消息，handleConn 通过 leaving 通道通知客户离开，然后关闭连接。</p>
+<p>​</p>
+<h2 id="客户端">客户端</h2>
+<p>前面对服务端做了简单的介绍，下面介绍客户端，这里将其命名为“netcat.go”，完整代码如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// netcat 是一个简单的TCP服务器读/写客户端
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;io&#34;</span>
+    <span style="color:#e6db74">&#34;log&#34;</span>
+    <span style="color:#e6db74">&#34;net&#34;</span>
+    <span style="color:#e6db74">&#34;os&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#e6db74">&#34;localhost:8000&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#a6e22e">done</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">struct</span>{})
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Copy</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">conn</span>) <span style="color:#75715e">// 注意：忽略错误
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;done&#34;</span>)
+        <span style="color:#a6e22e">done</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">struct</span>{}{} <span style="color:#75715e">// 向主Goroutine发出信号
+</span><span style="color:#75715e"></span>    }()
+    <span style="color:#a6e22e">mustCopy</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdin</span>)
+    <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">done</span> <span style="color:#75715e">// 等待后台goroutine完成
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">mustCopy</span>(<span style="color:#a6e22e">dst</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">src</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Reader</span>) {
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Copy</span>(<span style="color:#a6e22e">dst</span>, <span style="color:#a6e22e">src</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+    }
+}
+</code></pre></div><p>当有 n 个客户 session 在连接的时候，程序并发运行着<code>2n+2 </code>个相互通信的 goroutine，它不需要隐式的加锁操作。clients map 限制在广播器这一个 goroutine 中被访问，所以不会并发访问它。唯一被多个 goroutine 共享的变量是通道以及 net.Conn 的实例，它们又都是并发安全的。</p>
+<p>使用<code>go build </code>命令编译服务端和客户端，并运行生成的可执行文件。</p>
+<p>​</p>
+<p>下图中展示了在同一台计算机上运行的一个服务端和三个客户端：</p>
+<p><img src="https://mylovelyella-1304535408.cos.ap-guangzhou.myqcloud.com/blog/public/clipboard_20201216_061515.png" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Peacher </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mylovelyella.github.io/2020/chat/>https://mylovelyella.github.io/2020/chat/</span>
+            </p>
+            
+            
+            <p class="copyright-item lincese">
+                未经允许不得转载
+            </p>
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://mylovelyella.github.io/tags/go%E7%AC%94%E8%AE%B0/">
+                    #go笔记</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://mylovelyella.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mylovelyella.github.io/2020/parallel-exit/" class="prev" rel="prev" title="Go并发：合理退出并发协程"><i class="iconfont icon-left"></i>&nbsp;Go并发：合理退出并发协程</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mylovelyella.github.io">Peacher</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+
+
+        </div>
+    </body>
+</html>

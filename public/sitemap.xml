@@ -2,9 +2,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://mylovelyella.github.io/2020/chat/</loc>
+      
+      <lastmod>2020-12-16T18:04:27+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mylovelyella.github.io/tags/go%E7%AC%94%E8%AE%B0/</loc>
+      
+      <lastmod>2020-12-16T18:04:27+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>https://mylovelyella.github.io/</loc>
       
-      <lastmod>2020-12-16T14:32:42+08:00</lastmod>
+      <lastmod>2020-12-16T18:04:27+08:00</lastmod>
       
       
       
@@ -14,7 +34,7 @@
     <url>
       <loc>https://mylovelyella.github.io/posts/</loc>
       
-      <lastmod>2020-12-16T14:32:42+08:00</lastmod>
+      <lastmod>2020-12-16T18:04:27+08:00</lastmod>
       
       
       
@@ -24,7 +44,17 @@
     <url>
       <loc>https://mylovelyella.github.io/tags/</loc>
       
-      <lastmod>2020-12-16T14:32:42+08:00</lastmod>
+      <lastmod>2020-12-16T18:04:27+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mylovelyella.github.io/2020/parallel-exit/</loc>
+      
+      <lastmod>2020-12-16T17:25:14+08:00</lastmod>
       
       
       
@@ -55,16 +85,6 @@
       <loc>https://mylovelyella.github.io/2020/goroutine-channel/</loc>
       
       <lastmod>2020-12-16T11:09:04+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mylovelyella.github.io/tags/go%E7%AC%94%E8%AE%B0/</loc>
-      
-      <lastmod>2020-12-16T10:33:06+08:00</lastmod>
       
       
       

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="Peacher">
+    <meta name="description" content="???????">
+    <meta name="keywords" content="???????">
+    
+    <link rel="prev" href="https://mylovelyella.github.io/2020/website-setting-url/" />
+    <link rel="next" href="https://mylovelyella.github.io/2020/chat/" />
+    <link rel="canonical" href="https://mylovelyella.github.io/2020/parallel-exit/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            Go并发：合理退出并发协程 | Peacher`s Blog
+        
+    </title>
+    <meta name="title" content="Go并发：合理退出并发协程 | Peacher`s Blog">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mylovelyella.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Go并发：合理退出并发协程",
+    "headline" : "Go并发：合理退出并发协程",
+    "description" : "Golang并发模型：合理退出并发协程 goroutine作为Golang并发的核心，我们不仅要关注它们的创建和管理，当然还要关注如何合理的退",
+    "inLanguage" : "zh-cn",
+    "author" : "Peacher",
+    "creator" : "Peacher",
+    "publisher": "Peacher",
+    "accountablePerson" : "Peacher",
+    "copyrightHolder" : "Peacher",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-12-16 17:25:14 \u002b0800 CST",
+    "dateModified" : "2020-12-16 17:25:14 \u002b0800 CST",
+    "url" : "https:\/\/mylovelyella.github.io\/2020\/parallel-exit\/",
+    "wordCount" : "1922",
+    "keywords" : [ "go笔记", "Peacher`s Blog"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://mylovelyella.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://mylovelyella.github.io">Peacher`s Blog</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go并发：合理退出并发协程</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mylovelyella.github.io" rel="author">Peacher</a> with ♥
+                <span class="post-time">
+                on <time datetime=2020-12-16 itemprop="datePublished">December 16, 2020</time>
+                </span>
+                in
+                
+                <span class="post-word-count">1922 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <p><a href="https://segmentfault.com/a/1190000017251049">Golang并发模型：合理退出并发协程</a></p>
+<p>goroutine作为Golang并发的核心，我们不仅要关注它们的创建和管理，当然还要关注如何合理的退出这些协程，不（合理）退出不然可能会造成阻塞、panic、程序行为异常、数据结果不正确等问题。这篇文章介绍，如何合理的退出goroutine，减少软件bug。</p>
+<p>goroutine在退出方面，不像线程和进程，不能通过某种手段<strong>强制</strong>关闭它们，只能等待goroutine主动退出。但也无需为退出、关闭goroutine而烦恼，下面就介绍3种优雅退出goroutine的方法，只要采用这种最佳实践去设计，基本上就可以确保goroutine退出上不会有问题，尽情享用。</p>
+<h1 id="1使用for-range退出">1：使用for-range退出</h1>
+<p><code>for-range</code>是使用频率很高的结构，常用它来遍历数据，<code>**range**</code><strong>能够感知channel的关闭，当channel被发送数据的协程关闭时，range就会结束</strong>，接着退出for循环。</p>
+<p>它在并发中的使用场景是：当协程只从1个channel读取数据，然后进行处理，处理后协程退出。下面这个示例程序，当in通道被关闭时，协程可自动退出。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">go</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">in</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">chan</span> <span style="color:#66d9ef">int</span>) {
+    <span style="color:#75715e">// Using for-range to exit goroutine
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// range has the ability to detect the close/end of a channel
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">range</span> <span style="color:#66d9ef">in</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Process %d\n&#34;</span>, <span style="color:#a6e22e">x</span>)
+    }
+}(<span style="color:#a6e22e">inCh</span>)
+</code></pre></div><p>​</p>
+<h1 id="2使用ok退出">2：使用,ok退出</h1>
+<p><code>for-select</code>也是使用频率很高的结构，select提供了多路复用的能力，所以for-select可以让函数具有持续多路处理多个channel的能力。<strong>但select没有感知channel的关闭，这引出了2个问题</strong>：</p>
+<ol>
+<li>继续在关闭的通道上读，会读到通道传输数据类型的零值，如果是指针类型，读到nil，继续处理还会产生nil。</li>
+<li>继续在关闭的通道上写，将会panic。</li>
+</ol>
+<p>问题2可以这样解决，通道只由发送方关闭，接收方不可关闭，即某个写通道只由使用该select的协程关闭，select中就不存在继续在关闭的通道上写数据的问题。</p>
+<p>问题1可以使用<code>,ok</code>来检测通道的关闭，使用情况有2种。</p>
+<p>第一种：<strong>如果某个通道关闭后，需要退出协程，直接return即可</strong>。示例代码中，该协程需要从in通道读数据，还需要定时打印已经处理的数量，有2件事要做，所有不能使用for-range，需要使用for-select，当in关闭时，<code>ok=false</code>，我们直接返回。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">go</span> <span style="color:#a6e22e">func</span>() {
+<span style="color:#75715e">//有2件事要做，所有不能使用for-range，需要使用for-select，当in关闭时，ok=false，我们直接返回。
+</span><span style="color:#75715e">//当in关闭时,ok=false，我们直接返回。
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// in for-select using ok to exit goroutine
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> {
+		<span style="color:#a6e22e">select</span> {
+		<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">in</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">if</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">ok</span> {
+			<span style="color:#75715e">//如果某个通道关闭后，需要退出协程，直接return即可
+</span><span style="color:#75715e"></span>				<span style="color:#66d9ef">return</span>
+			}
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Process %d\n&#34;</span>, <span style="color:#a6e22e">x</span>)
+			<span style="color:#a6e22e">processedCnt</span><span style="color:#f92672">++</span>
+		<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">C</span><span style="color:#f92672">:</span>
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Working, processedCnt = %d\n&#34;</span>, <span style="color:#a6e22e">processedCnt</span>)
+		}
+	}
+}()
+
+</code></pre></div><p>​</p>
+<p>第二种：如果<strong>某个通道关闭了，不再处理该通道，而是继续处理其他case</strong>，退出是等待所有的可读通道关闭。我们需要<strong>使用select的一个特征：select不会在nil的通道上进行等待</strong>。这种情况，把只读通道设置为nil即可解决。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">go</span> <span style="color:#a6e22e">func</span>() {
+<span style="color:#75715e">//如果某个通道关闭了，不再处理该通道，而是继续处理其他case，退出是等待所有的可读通道关闭。
+</span><span style="color:#75715e">// 我们需要使用select的一个特征：select不会在nil的通道上进行等待。这种情况，把只读通道设置为nil即可解决。
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// in for-select using ok to exit goroutine
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> {
+		<span style="color:#a6e22e">select</span> {
+		<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">in1</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">if</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">ok</span> {
+				<span style="color:#a6e22e">in1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nil</span>
+			}
+			<span style="color:#75715e">// Process
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">in2</span><span style="color:#f92672">:</span>
+			<span style="color:#66d9ef">if</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">ok</span> {
+				<span style="color:#a6e22e">in2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nil</span>
+			}
+			<span style="color:#75715e">// Process
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">C</span><span style="color:#f92672">:</span>
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Working, processedCnt = %d\n&#34;</span>, <span style="color:#a6e22e">processedCnt</span>)
+		}
+
+		<span style="color:#75715e">// If both in channel are closed, goroutine exit
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">in1</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">nil</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">in2</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">nil</span> {
+			<span style="color:#66d9ef">return</span>
+		}
+	}
+}()
+
+</code></pre></div><p>​</p>
+<h1 id="3使用退出通道退出">3：使用退出通道退出</h1>
+<p><strong>使用<code>,ok</code>来退出使用for-select协程，解决是当读入数据的通道关闭时，没数据读时程序的正常结束</strong>。想想下面这2种场景，<code>,ok</code>还能适用吗？</p>
+<ol>
+<li>接收的协程要退出了，如果它直接退出，不告知发送协程，发送协程将阻塞。</li>
+<li>启动了一个工作协程处理数据，如何通知它退出？</li>
+</ol>
+<p><strong>使用一个专门的通道，发送退出的信号，可以解决这类问题</strong>。以第2个场景为例，协程入参包含一个停止通道<code>stopCh</code>，当<code>stopCh</code>被关闭，<code>case &lt;-stopCh</code>会执行，直接返回即可。</p>
+<p>当我启动了100个worker时，只要<code>main()</code>执行关闭stopCh，每一个worker都会都到信号，进而关闭。如果<code>main()</code>向stopCh发送100个数据，这种就低效了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">func</span> <span style="color:#a6e22e">worker</span>(<span style="color:#a6e22e">stopCh</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">chan</span> <span style="color:#a6e22e">struct</span>{}) {
+	<span style="color:#a6e22e">go</span> <span style="color:#a6e22e">func</span>() {
+		<span style="color:#a6e22e">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;worker exit&#34;</span>)
+		<span style="color:#75715e">// Using stop channel explicit exit
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">for</span> {
+			<span style="color:#a6e22e">select</span> {
+			<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">stopCh</span><span style="color:#f92672">:</span>
+				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Recv stop signal&#34;</span>)
+				<span style="color:#66d9ef">return</span>
+			<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">C</span><span style="color:#f92672">:</span>
+				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Working .&#34;</span>)
+			}
+		}
+	}()
+	<span style="color:#66d9ef">return</span>
+}
+
+</code></pre></div><p>​</p>
+<h3 id="最佳实践回顾"><strong>最佳实践回顾</strong></h3>
+<ol>
+<li>发送协程主动关闭通道，接收协程不关闭通道。技巧：把接收方的通道入参声明为只读，如果接收协程关闭只读协程，编译时就会报错。</li>
+<li>协程处理1个通道，并且是读时，协程优先使用<code>for-range</code>，因为<code>range</code>可以关闭通道的关闭自动退出协程。</li>
+<li><code>,ok</code>可以处理多个读通道关闭，需要关闭当前使用<code>for-select</code>的协程。</li>
+<li>显式关闭通道<code>stopCh</code>可以处理主动通知协程退出的场景。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Peacher </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mylovelyella.github.io/2020/parallel-exit/>https://mylovelyella.github.io/2020/parallel-exit/</span>
+            </p>
+            
+            
+            <p class="copyright-item lincese">
+                未经允许不得转载
+            </p>
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://mylovelyella.github.io/tags/go%E7%AC%94%E8%AE%B0/">
+                    #go笔记</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://mylovelyella.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mylovelyella.github.io/2020/website-setting-url/" class="prev" rel="prev" title="网站足迹: 网站设置"><i class="iconfont icon-left"></i>&nbsp;网站足迹: 网站设置</a>
+        
+        
+        <a href="https://mylovelyella.github.io/2020/chat/" class="next" rel="next" title="Go并发：聊天服务器">Go并发：聊天服务器&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mylovelyella.github.io">Peacher</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+
+
+        </div>
+    </body>
+</html>

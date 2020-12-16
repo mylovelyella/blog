@@ -6,7 +6,25 @@
     <description>Recent content in Posts on Peacher`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 16 Dec 2020 14:32:42 +0800</lastBuildDate><atom:link href="https://mylovelyella.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Dec 2020 18:04:27 +0800</lastBuildDate><atom:link href="https://mylovelyella.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go并发：聊天服务器</title>
+      <link>https://mylovelyella.github.io/2020/chat/</link>
+      <pubDate>Wed, 16 Dec 2020 18:04:27 +0800</pubDate>
+      
+      <guid>https://mylovelyella.github.io/2020/chat/</guid>
+      <description>Go语言聊天服务器 服务端 服务端程序中包含 4 个 goroutine，分别是一个主 goroutine 和广播（broadcaster）goroutine，每一个连接</description>
+    </item>
+    
+    <item>
+      <title>Go并发：合理退出并发协程</title>
+      <link>https://mylovelyella.github.io/2020/parallel-exit/</link>
+      <pubDate>Wed, 16 Dec 2020 17:25:14 +0800</pubDate>
+      
+      <guid>https://mylovelyella.github.io/2020/parallel-exit/</guid>
+      <description>Golang并发模型：合理退出并发协程 goroutine作为Golang并发的核心，我们不仅要关注它们的创建和管理，当然还要关注如何合理的退</description>
+    </item>
+    
     <item>
       <title>网站足迹: 网站设置</title>
       <link>https://mylovelyella.github.io/2020/website-setting-url/</link>
@@ -17,7 +35,7 @@
     </item>
     
     <item>
-      <title>Go：Goroutine与Channel实现并行</title>
+      <title>Go并发：Goroutine与Channel实现并发</title>
       <link>https://mylovelyella.github.io/2020/goroutine-channel/</link>
       <pubDate>Wed, 16 Dec 2020 11:09:04 +0800</pubDate>
       
@@ -26,7 +44,7 @@
     </item>
     
     <item>
-      <title>Go：Flag库</title>
+      <title>Go标准库：Flag库</title>
       <link>https://mylovelyella.github.io/2020/flag/</link>
       <pubDate>Wed, 16 Dec 2020 10:33:06 +0800</pubDate>
       
@@ -44,7 +62,7 @@
     </item>
     
     <item>
-      <title>Love Diary：Date1</title>
+      <title>Love♥Diary：Date-1</title>
       <link>https://mylovelyella.github.io/2020/date1/</link>
       <pubDate>Sun, 27 Sep 2020 14:14:32 +0800</pubDate>
       
