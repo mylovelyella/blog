@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Peacher`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 16 Dec 2020 18:04:27 +0800</lastBuildDate><atom:link href="https://mylovelyella.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Dec 2020 10:21:29 +0800</lastBuildDate><atom:link href="https://mylovelyella.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2020Summary</title>
+      <link>https://mylovelyella.github.io/2020/2020summary/</link>
+      <pubDate>Wed, 30 Dec 2020 10:21:29 +0800</pubDate>
+      
+      <guid>https://mylovelyella.github.io/2020/2020summary/</guid>
+      <description>2020年还剩下不到40个小时，这一年可以说是太多波折和困难的一年。年初的疫情打乱了我所有的计划，本来还想着早点回学校和同学努力一把，结果只</description>
+    </item>
+    
     <item>
       <title>Go并发：聊天服务器</title>
       <link>https://mylovelyella.github.io/2020/chat/</link>
