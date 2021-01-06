@@ -1,5 +1,5 @@
 ---
-title: "Love♥Diary：Date-1"
+title: "Love♥Diary：First Date"
 date: 2020-09-27T14:14:32+08:00
 tags: ["Love-Diary"]
 draft: false

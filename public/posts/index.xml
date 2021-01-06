@@ -17,51 +17,6 @@
     </item>
     
     <item>
-      <title>Go并发：聊天服务器</title>
-      <link>https://mylovelyella.github.io/2020/chat/</link>
-      <pubDate>Wed, 16 Dec 2020 18:04:27 +0800</pubDate>
-      
-      <guid>https://mylovelyella.github.io/2020/chat/</guid>
-      <description>Go语言聊天服务器 服务端 服务端程序中包含 4 个 goroutine，分别是一个主 goroutine 和广播（broadcaster）goroutine，每一个连接</description>
-    </item>
-    
-    <item>
-      <title>Go并发：合理退出并发协程</title>
-      <link>https://mylovelyella.github.io/2020/parallel-exit/</link>
-      <pubDate>Wed, 16 Dec 2020 17:25:14 +0800</pubDate>
-      
-      <guid>https://mylovelyella.github.io/2020/parallel-exit/</guid>
-      <description>Golang并发模型：合理退出并发协程 goroutine作为Golang并发的核心，我们不仅要关注它们的创建和管理，当然还要关注如何合理的退</description>
-    </item>
-    
-    <item>
-      <title>网站足迹: 网站设置</title>
-      <link>https://mylovelyella.github.io/2020/website-setting-url/</link>
-      <pubDate>Wed, 16 Dec 2020 14:32:42 +0800</pubDate>
-      
-      <guid>https://mylovelyella.github.io/2020/website-setting-url/</guid>
-      <description>mylovelyella网站现在主题为Mogege,其基于LeaveIt. 腾讯cos图床</description>
-    </item>
-    
-    <item>
-      <title>Go并发：Goroutine与Channel实现并发</title>
-      <link>https://mylovelyella.github.io/2020/goroutine-channel/</link>
-      <pubDate>Wed, 16 Dec 2020 11:09:04 +0800</pubDate>
-      
-      <guid>https://mylovelyella.github.io/2020/goroutine-channel/</guid>
-      <description>[toc] Go语言圣经 ​ 1. Goroutines 在Go语言中，每一个并发的执行单元叫作一个goroutine。设想这里的一个程序有两个函数，一个函数做计算，另一个输出结</description>
-    </item>
-    
-    <item>
-      <title>Go标准库：Flag库</title>
-      <link>https://mylovelyella.github.io/2020/flag/</link>
-      <pubDate>Wed, 16 Dec 2020 10:33:06 +0800</pubDate>
-      
-      <guid>https://mylovelyella.github.io/2020/flag/</guid>
-      <description>Go语言内置了非常多具有常用功能的内置包，它们被称为标准库。我会在博客中以每篇文章一个标准库的方式记录我对标准库的理解和学习笔记。 今天是第一</description>
-    </item>
-    
-    <item>
       <title>网站足迹: My First Step</title>
       <link>https://mylovelyella.github.io/2020/my-first-step/</link>
       <pubDate>Thu, 03 Dec 2020 16:51:29 +0800</pubDate>
@@ -71,7 +26,25 @@
     </item>
     
     <item>
-      <title>Love♥Diary：Date-1</title>
+      <title>Love♥Diary：Birthday</title>
+      <link>https://mylovelyella.github.io/2020/birthday/</link>
+      <pubDate>Thu, 19 Nov 2020 05:20:00 +0800</pubDate>
+      
+      <guid>https://mylovelyella.github.io/2020/birthday/</guid>
+      <description>Happy Birthday: 2020.11.19 生日快乐！世界第一小可爱，希望你每一天都幸福开心哦！</description>
+    </item>
+    
+    <item>
+      <title>Love♥Diary：First Kiss</title>
+      <link>https://mylovelyella.github.io/2020/kiss1/</link>
+      <pubDate>Sat, 14 Nov 2020 14:14:32 +0800</pubDate>
+      
+      <guid>https://mylovelyella.github.io/2020/kiss1/</guid>
+      <description>First Kiss: 2020.11.14 这是我们的初吻，我永远爱你，我的小可爱。</description>
+    </item>
+    
+    <item>
+      <title>Love♥Diary：First Date</title>
       <link>https://mylovelyella.github.io/2020/date1/</link>
       <pubDate>Sun, 27 Sep 2020 14:14:32 +0800</pubDate>
       

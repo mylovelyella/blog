@@ -2,7 +2,7 @@
 title: "Go并发：合理退出并发协程"
 date: 2020-12-16T17:25:14+08:00
 tags: ["go笔记"]
-draft: false
+draft: true
 ---
 
 [Golang并发模型：合理退出并发协程](https://segmentfault.com/a/1190000017251049)
