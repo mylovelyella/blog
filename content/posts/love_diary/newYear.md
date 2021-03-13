@@ -14,4 +14,7 @@ draft: false
 
 希望2021一切顺利，爱你，小可爱，😘
 
-![2020拜拜](https://mylovelyella-1304535408.cos.ap-guangzhou.myqcloud.com/blog/public/2020%E6%8B%9C%E6%8B%9C.jpg)
+
+
+![2020拜拜](https://raw.githubusercontent.com/mylovelyella/blog_pic/main/2021_01_01_2020%E6%8B%9C%E6%8B%9C.jpg)
+
