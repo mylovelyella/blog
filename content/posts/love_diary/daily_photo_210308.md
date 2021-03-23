@@ -1,6 +1,6 @@
 ---
-title: "Love♥Diary：Daily Love"
-date: 2021-03-06T05:20:00+08:00
+title: "Love♥Diary：Daily Love 21.03.07"
+date: 2021-03-07T05:20:00+08:00
 tags: ["Love-Diary"]
 draft: false
 ---
@@ -11,7 +11,7 @@ draft: false
 
 ### 2021.03.07
 
-中大松竹园食堂
+中大松涛园食堂
 
 ![爱你](https://mylovelyella-1304535408.cos.ap-guangzhou.myqcloud.com/blog/public/2021_03_07_%E9%A3%9F%E5%A0%82.jpg)
 
@@ -36,4 +36,3 @@ draft: false
 阿凡达
 
 ![爱你](https://mylovelyella-1304535408.cos.ap-guangzhou.myqcloud.com/blog/public/2021_03_13_%E9%98%BF%E5%87%A1%E8%BE%BE.jpg)
-
