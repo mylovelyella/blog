@@ -13,7 +13,7 @@ draft: false
 
 踏青出游，泡泡与小可爱
 
-![爱你](https://mylovelyella-1304535408.cos.ap-guangzhou.myqcloud.com/blog/public/2021_03_30_%E7%A0%82%E9%94%85%E7%B2%A5.jpg)
+![爱你](https://mylovelyella-1304535408.cos.ap-guangzhou.myqcloud.com/blog/public/2021_04_04_%E6%B3%A1%E6%B3%A1.jpg)
 
 ### 2021.04.06
 
