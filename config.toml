@@ -46,7 +46,7 @@ preserveTaxonomyNames = true
     author = "Peacher"                          # Author's name
     avatar = "http://p3.music.126.net/0_CN90sIhKKw3pwUqK7Bjg==/109951165405091764.jpg"
     # "/image/website/avatar.jpg"           # Author's avatar
-    subtitle = "Nice to meet u"                  # Subtitle
+    subtitle = "永远爱 小可爱"                  # Subtitle
     cdn_url = ""           # Base CDN URL
     home_mode = "" # post or other
     enableGitalk = false # gitalk 评论系统
